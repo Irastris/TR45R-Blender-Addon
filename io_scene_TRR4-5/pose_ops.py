@@ -6,7 +6,7 @@ from .utils import TRM_SCALE
 POSE_ANGLE_SCALE = 1024
 POSE_ROTATION_ORDER = 'YXZ'
 
-class TR123R_OT_PoseHandler:
+class TR45R_OT_PoseHandler:
     addon_prefs: bpy.types.AddonPreferences = None
     pose_path_exists = False
 
@@ -74,8 +74,8 @@ class TR123R_OT_PoseHandler:
 
         return context.window_manager.invoke_props_dialog(self)
 
-class TR123R_OT_LoadPose(bpy.types.Operator, TR123R_OT_PoseHandler):
-    bl_idname = "io_tombraider123r.pose_load"
+class TR45R_OT_LoadPose(bpy.types.Operator, TR45R_OT_PoseHandler):
+    bl_idname = "io_tombraider45r.pose_load"
     bl_label = "Load Photo Mode Pose"
     bl_description = "Loads a chosen Lara's pose to active Armature from POSE.txt.\nPath can be set in addon preferences"
     bl_options = {'UNDO'}
@@ -229,8 +229,8 @@ class TR123R_OT_LoadPose(bpy.types.Operator, TR123R_OT_PoseHandler):
 
     exec_pose = load_pose
 
-class TR123R_OT_SavePose(bpy.types.Operator, TR123R_OT_PoseHandler):
-    bl_idname = "io_tombraider123r.pose_save"
+class TR45R_OT_SavePose(bpy.types.Operator, TR45R_OT_PoseHandler):
+    bl_idname = "io_tombraider45r.pose_save"
     bl_label = "Save Photo Mode Pose"
     bl_description = "Saves current Pose or Action of active Armature to POSE.txt.\nPath can be set in addon preferences"
 
@@ -435,8 +435,8 @@ class TR123R_OT_SavePose(bpy.types.Operator, TR123R_OT_PoseHandler):
         row.prop(self, 'pose_id', text=pose_id_text)
         row.enabled = not self.add_new
 
-class TR123R_OT_PoseSwitchState(bpy.types.Operator, TR123R_OT_PoseHandler):
-    bl_idname = "io_tombraider123r.pose_switch_state"
+class TR45R_OT_PoseSwitchState(bpy.types.Operator, TR45R_OT_PoseHandler):
+    bl_idname = "io_tombraider45r.pose_switch_state"
     bl_label = "Photo Mode Poses State"
     bl_description = "Enable or Disable a Photo Mode Pose"
 
@@ -529,9 +529,9 @@ class TR123R_OT_PoseSwitchState(bpy.types.Operator, TR123R_OT_PoseHandler):
         row.enabled = not self.switch_all
 
 cls = (
-    TR123R_OT_LoadPose,
-    TR123R_OT_SavePose,
-    TR123R_OT_PoseSwitchState,
+    TR45R_OT_LoadPose,
+    TR45R_OT_SavePose,
+    TR45R_OT_PoseSwitchState,
 )
 
 _register, _unregister = bpy.utils.register_classes_factory(cls)

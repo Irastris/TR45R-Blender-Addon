@@ -8,9 +8,9 @@ from bpy.types import Operator
 from . import utils as trm_utils
 from .bin_parse import TRM_HEADER, TRM_FORMAT, TRM_ANIM_FORMAT
 
-class TR123R_OT_ExportTRM(Operator, ExportHelper):
+class TR45R_OT_ExportTRM(Operator, ExportHelper):
     """Save object as TRM file"""
-    bl_idname = "io_tombraider123r.trm_export"
+    bl_idname = "io_tombraider45r.trm_export"
     bl_label = "Export TRM"
 
     filename_ext = f"{TRM_FORMAT}"
@@ -442,7 +442,7 @@ class TR123R_OT_ExportTRM(Operator, ExportHelper):
         return result
 
 def register():
-    bpy.utils.register_class(TR123R_OT_ExportTRM)
+    bpy.utils.register_class(TR45R_OT_ExportTRM)
 
 def unregister():
-    bpy.utils.unregister_class(TR123R_OT_ExportTRM)
+    bpy.utils.unregister_class(TR45R_OT_ExportTRM)

@@ -1,14 +1,14 @@
 bl_info = {
-    "name" : "Tomb Raider I-III Remastered - Tools (.TRM, POSE.txt)",
-    "author" : "MuruCoder, MaRaider, Czarpos",
-    "description" : "Tools to handle .TRM and POSE.txt files for Tomb Raider Remastered I-III games.",
-    "blender" : (4, 1, 0),
-    "version" : (0, 7, 3),
+    "name" : "Tomb Raider IV-V Remastered - Tools (.TRM, POSE.txt)",
+    "author" : "Irastris, PositionWizard, MuruCoder, MaRaider, Czarpos",
+    "description" : "Tools to handle .TRM and POSE.txt files for Tomb Raider Remastered IV-V games.",
+    "blender" : (4, 2, 0),
+    "version" : (0, 7, 4),
     "category": "Import-Export",
 	"location": "File > Import/Export; Material Properties > Surface; UV > N-Panel",
     "warning" : "Game uses DDS textures, must be handled separately.",
-    "doc_url": "https://github.com/PositionWizard/TR123R-Blender-Addon",
-    "tracker_url": "https://github.com/PositionWizard/TR123R-Blender-Addon/issues"
+    "doc_url": "https://github.com/Irastris/TR45R-Blender-Addon",
+    "tracker_url": "https://github.com/Irastris/TR45R-Blender-Addon/issues"
 }
 
 # Reload previously loaded modules
@@ -38,7 +38,7 @@ from . import addon_updater_ops, utils, pdp_utils, bin_parse, trm_import, trm_ex
 import bpy, os
 
 @addon_updater_ops.make_annotations
-class TR123R_PT_Preferences(bpy.types.AddonPreferences):
+class TR45R_PT_Preferences(bpy.types.AddonPreferences):
     bl_idname = __package__
 
     def make_paths_abs(self, context, key):
@@ -69,7 +69,7 @@ class TR123R_PT_Preferences(bpy.types.AddonPreferences):
 
     game_path: bpy.props.StringProperty(
         name="Game Directory",
-        description='Tomb Raider I-III Remastered game main directory.\n\n'
+        description='Tomb Raider IV-V Remastered game main directory.\n\n'
                     'Used to find texture files related to imported model.\n'
                     'Leave empty to automatically look for textures relatively to directory the TRM is in',
         subtype='DIR_PATH',
@@ -79,7 +79,7 @@ class TR123R_PT_Preferences(bpy.types.AddonPreferences):
 
     pose_filepath: bpy.props.StringProperty(
         name="Photo Mode Poses",
-        description='Tomb Raider I-III Remastered POSE.txt filepath for Lara photo mode poses.\n'
+        description='Tomb Raider IV-V Remastered POSE.txt filepath for Lara photo mode poses.\n'
                     'File located in "[Game Directory]/1/DATA/POSE.txt"\n\n'
                     'Optional field for working outside of game files.\n'
                     'Path is necessary if Game Directory is not provided!!!\n'
@@ -143,7 +143,7 @@ class TR123R_PT_Preferences(bpy.types.AddonPreferences):
 
         row = col.row()
         row.label(text='Generate Bone Data for TRMs:')
-        row.operator('io_tombraider123r.generate_skeleton_data')
+        row.operator('io_tombraider45r.generate_skeleton_data')
 
         col.separator()
 
@@ -155,7 +155,7 @@ class TR123R_PT_Preferences(bpy.types.AddonPreferences):
         addon_updater_ops.update_settings_ui(self,context)
 
 cls =(
-    TR123R_PT_Preferences,
+    TR45R_PT_Preferences,
 )
 
 _register, _unregister = bpy.utils.register_classes_factory(cls)

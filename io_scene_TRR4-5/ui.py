@@ -35,7 +35,7 @@ def update_data_type(self, context, prop, data_type:str):
                     input = shader_node.inputs.get(data_name)
                     input.default_value = val
 
-class TR123R_PG_ShaderDataPropTypes(bpy.types.PropertyGroup):
+class TR45R_PG_ShaderDataPropTypes(bpy.types.PropertyGroup):
     data_type: bpy.props.StringProperty(name="type", default='int')
 
     def poll_get_material(self, mat):
@@ -61,7 +61,7 @@ class TR123R_PG_ShaderDataPropTypes(bpy.types.PropertyGroup):
                                       update=lambda s,c: update_data_type(s,c, 'data_bool', 'bool'))
 
 
-class TR123R_PG_ShaderSettings(bpy.types.PropertyGroup):
+class TR45R_PG_ShaderSettings(bpy.types.PropertyGroup):
     type: bpy.props.EnumProperty(
         name=trm_utils.SHADER_DATA_NAMES[0],
         items=(
@@ -83,22 +83,22 @@ class TR123R_PG_ShaderSettings(bpy.types.PropertyGroup):
     )
 
     data1: bpy.props.PointerProperty(
-        type=TR123R_PG_ShaderDataPropTypes,
+        type=TR45R_PG_ShaderDataPropTypes,
         name=trm_utils.SHADER_DATA_NAMES[1],
     )
 
     data2: bpy.props.PointerProperty(
-        type=TR123R_PG_ShaderDataPropTypes,
+        type=TR45R_PG_ShaderDataPropTypes,
         name=trm_utils.SHADER_DATA_NAMES[2],
     )
 
     data3: bpy.props.PointerProperty(
-        type=TR123R_PG_ShaderDataPropTypes,
+        type=TR45R_PG_ShaderDataPropTypes,
         name=trm_utils.SHADER_DATA_NAMES[3],
     )
 
     data4: bpy.props.PointerProperty(
-        type=TR123R_PG_ShaderDataPropTypes,
+        type=TR45R_PG_ShaderDataPropTypes,
         name=trm_utils.SHADER_DATA_NAMES[4],
     )
 
@@ -132,9 +132,9 @@ class TRM_PT_ShaderSettings:
         if shadernode:
             inst_node = trm_utils.find_TRM_shader_node(mat)
             if inst_node:
-                op = col.operator(ops.TR123R_OT_CreateShader.bl_idname, text="Swap Shader Instance")
+                op = col.operator(ops.TR45R_OT_CreateShader.bl_idname, text="Swap Shader Instance")
                 op.new_instance = False
-                op = col.operator(ops.TR123R_OT_CreateShader.bl_idname, text="Create New Shader Instance")
+                op = col.operator(ops.TR45R_OT_CreateShader.bl_idname, text="Create New Shader Instance")
                 op.new_instance = True
 
                 # draw Shader Type enum and value preview
@@ -161,41 +161,41 @@ class TRM_PT_ShaderSettings:
             else:
                 self.draw_TRM_error(col)
                 col = layout.column(align=False)
-                op = col.operator(ops.TR123R_OT_CreateShader.bl_idname, text="Add Existing Shader Instance")
+                op = col.operator(ops.TR45R_OT_CreateShader.bl_idname, text="Add Existing Shader Instance")
                 op.new_instance = False
-                op = col.operator(ops.TR123R_OT_CreateShader.bl_idname, text="Create New Shader Instance")
+                op = col.operator(ops.TR45R_OT_CreateShader.bl_idname, text="Create New Shader Instance")
                 op.new_instance = True
         else:
             self.draw_TRM_error(col)
             col = layout.column(align=False)
-            col.operator(ops.TR123R_OT_CreateShader.bl_idname)
+            col.operator(ops.TR45R_OT_CreateShader.bl_idname)
 
         addon_updater_ops.update_notice_box_ui(self, context)
 
-class TR123R_PT_ShaderSettings_Cycles(bpy.types.Panel, TRM_PT_ShaderSettings):
+class TR45R_PT_ShaderSettings_Cycles(bpy.types.Panel, TRM_PT_ShaderSettings):
     bl_parent_id = "CYCLES_MATERIAL_PT_surface"
 
-class TR123R_PT_ShaderSettings_Eevee(bpy.types.Panel, TRM_PT_ShaderSettings):
+class TR45R_PT_ShaderSettings_Eevee(bpy.types.Panel, TRM_PT_ShaderSettings):
     bl_parent_id = "EEVEE_MATERIAL_PT_surface"
 
-class TR123R_MT_ImportMenu(bpy.types.Menu):
-    bl_idname = 'TR123R_MT_import'
-    bl_label = "Tomb Raider I-III Remastered"
+class TR45R_MT_ImportMenu(bpy.types.Menu):
+    bl_idname = 'TR45R_MT_import'
+    bl_label = "Tomb Raider IV-V Remastered"
 
     def draw(self, context):
         layout = self.layout
-        layout.operator(trm_import.TR123R_OT_ImportTRM.bl_idname, text=f"TR123R Model ({bin_parse.TRM_FORMAT})")
+        layout.operator(trm_import.TR45R_OT_ImportTRM.bl_idname, text=f"TR45R Model ({bin_parse.TRM_FORMAT})")
 
-class TR123R_MT_ExportMenu(bpy.types.Menu):
-    bl_idname = 'TR123R_MT_export'
-    bl_label = "Tomb Raider I-III Remastered"
+class TR45R_MT_ExportMenu(bpy.types.Menu):
+    bl_idname = 'TR45R_MT_export'
+    bl_label = "Tomb Raider IV-V Remastered"
 
     def draw(self, context):
         layout = self.layout
-        layout.operator(trm_export.TR123R_OT_ExportTRM.bl_idname, text=f"TR123R Model ({bin_parse.TRM_FORMAT})")
+        layout.operator(trm_export.TR45R_OT_ExportTRM.bl_idname, text=f"TR45R Model ({bin_parse.TRM_FORMAT})")
         
-class TR123R_PT_UvTools(bpy.types.Panel):
-    bl_label = "TR123R Tools"
+class TR45R_PT_UvTools(bpy.types.Panel):
+    bl_label = "TR45R Tools"
     bl_space_type = "IMAGE_EDITOR"
     bl_region_type = "UI"
     bl_category = "Tool"
@@ -206,18 +206,18 @@ class TR123R_PT_UvTools(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-        layout.label(text=ops.TR123R_OT_UV_QuantizeVerts.bl_label)
+        layout.label(text=ops.TR45R_OT_UV_QuantizeVerts.bl_label)
         col = layout.column()
         row = col.row(align=True)
-        op = row.operator(ops.TR123R_OT_UV_QuantizeVerts.bl_idname, text="Selection")
+        op = row.operator(ops.TR45R_OT_UV_QuantizeVerts.bl_idname, text="Selection")
         op.only_selected = True
-        op = row.operator(ops.TR123R_OT_UV_QuantizeVerts.bl_idname, text="All")
+        op = row.operator(ops.TR45R_OT_UV_QuantizeVerts.bl_idname, text="All")
         op.only_selected = False
 
         addon_updater_ops.update_notice_box_ui(self, context)
 
-class TR123R_PT_PoseTools(bpy.types.Panel):
-    bl_label = "TR123R Tools"
+class TR45R_PT_PoseTools(bpy.types.Panel):
+    bl_label = "TR45R Tools"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_category = "Tool"
@@ -231,58 +231,58 @@ class TR123R_PT_PoseTools(bpy.types.Panel):
         layout = self.layout
         box = layout.box()
         col = box.column(align=True)
-        col.label(text=pose_ops.TR123R_OT_LoadPose.bl_label)
+        col.label(text=pose_ops.TR45R_OT_LoadPose.bl_label)
         row = col.row()
-        op = row.operator(pose_ops.TR123R_OT_LoadPose.bl_idname, text="Load Pose")
+        op = row.operator(pose_ops.TR45R_OT_LoadPose.bl_idname, text="Load Pose")
         op.load_all = False
         row = col.row()
-        op = row.operator(pose_ops.TR123R_OT_LoadPose.bl_idname, text="Load All Poses")
+        op = row.operator(pose_ops.TR45R_OT_LoadPose.bl_idname, text="Load All Poses")
         op.load_all = True
 
         col = box.column(align=True)
-        col.label(text=pose_ops.TR123R_OT_SavePose.bl_label)
+        col.label(text=pose_ops.TR45R_OT_SavePose.bl_label)
         row = col.row()
-        op = row.operator(pose_ops.TR123R_OT_SavePose.bl_idname, text="Save Current Pose")
+        op = row.operator(pose_ops.TR45R_OT_SavePose.bl_idname, text="Save Current Pose")
         op.save_many = False
         row = col.row()
-        op = row.operator(pose_ops.TR123R_OT_SavePose.bl_idname, text="Save Multiple Poses")
+        op = row.operator(pose_ops.TR45R_OT_SavePose.bl_idname, text="Save Multiple Poses")
         op.save_many = True
 
         col = box.column(align=True)
-        col.label(text=pose_ops.TR123R_OT_PoseSwitchState.bl_label)
+        col.label(text=pose_ops.TR45R_OT_PoseSwitchState.bl_label)
         row = col.row()
-        op = row.operator(pose_ops.TR123R_OT_PoseSwitchState.bl_idname, text="Enable Poses")
+        op = row.operator(pose_ops.TR45R_OT_PoseSwitchState.bl_idname, text="Enable Poses")
         op.enable = True
         row = col.row()
-        op = row.operator(pose_ops.TR123R_OT_PoseSwitchState.bl_idname, text="Disable Poses")
+        op = row.operator(pose_ops.TR45R_OT_PoseSwitchState.bl_idname, text="Disable Poses")
         op.enable = False
 
         addon_updater_ops.update_notice_box_ui(self, context)
 
 cls =(
-    TR123R_MT_ImportMenu,
-    TR123R_MT_ExportMenu,
-    TR123R_PG_ShaderDataPropTypes,
-    TR123R_PG_ShaderSettings,
-    TR123R_PT_ShaderSettings_Cycles,
-    TR123R_PT_ShaderSettings_Eevee,
-    TR123R_PT_UvTools,
-    TR123R_PT_PoseTools,
+    TR45R_MT_ImportMenu,
+    TR45R_MT_ExportMenu,
+    TR45R_PG_ShaderDataPropTypes,
+    TR45R_PG_ShaderSettings,
+    TR45R_PT_ShaderSettings_Cycles,
+    TR45R_PT_ShaderSettings_Eevee,
+    TR45R_PT_UvTools,
+    TR45R_PT_PoseTools,
 )
 
 _register, _unregister = bpy.utils.register_classes_factory(cls)
 
 def menu_func_import(self, context):
-    self.layout.menu(TR123R_MT_ImportMenu.bl_idname, text=f"Tomb Raider I-III Remastered")
+    self.layout.menu(TR45R_MT_ImportMenu.bl_idname, text=f"Tomb Raider IV-V Remastered")
 
 def menu_func_export(self, context):
-    self.layout.menu(TR123R_MT_ExportMenu.bl_idname, text=f"Tomb Raider I-III Remastered")
+    self.layout.menu(TR45R_MT_ExportMenu.bl_idname, text=f"Tomb Raider IV-V Remastered")
 
 def register():
     _register()
     bpy.types.TOPBAR_MT_file_import.append(menu_func_import)
     bpy.types.TOPBAR_MT_file_export.append(menu_func_export)
-    bpy.types.Material.trm_settings = bpy.props.PointerProperty(type=TR123R_PG_ShaderSettings)
+    bpy.types.Material.trm_settings = bpy.props.PointerProperty(type=TR45R_PG_ShaderSettings)
 
 def unregister():
     del bpy.types.Material.trm_settings

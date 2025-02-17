@@ -2,8 +2,8 @@ import bpy, bmesh, os, pathlib
 from . import utils as trm_utils
 from . import pdp_utils
 
-class TR123R_OT_CreateShader(bpy.types.Operator):
-    bl_idname = "io_tombraider123r.create_shader"
+class TR45R_OT_CreateShader(bpy.types.Operator):
+    bl_idname = "io_tombraider45r.create_shader"
     bl_label = "Create TRM Shader"
     bl_description = "Add TRM Main Shader and Shader Instance to this material"
     bl_options = {'UNDO'}
@@ -99,8 +99,8 @@ class TR123R_OT_CreateShader(bpy.types.Operator):
             row = col.row()
             row.label(text="Use one of Shader Instances instead!")
     
-class TR123R_OT_UV_QuantizeVerts(bpy.types.Operator):
-    bl_idname = "io_tombraider123r.quantize_uvs"
+class TR45R_OT_UV_QuantizeVerts(bpy.types.Operator):
+    bl_idname = "io_tombraider45r.quantize_uvs"
     bl_label = "Set UV precision to 8-bits"
     bl_description = "Quantize UV coordinates so they can fit in 8-bit of data (multiply by 255)"
     bl_options = {"UNDO"}
@@ -136,8 +136,8 @@ class TR123R_OT_UV_QuantizeVerts(bpy.types.Operator):
                 bmesh.update_edit_mesh(mesh, destructive=False, loop_triangles=False)
         return {"FINISHED"}
 
-class TR123R_OT_GenerateSkeletonData(bpy.types.Operator):
-    bl_idname = "io_tombraider123r.generate_skeleton_data"
+class TR45R_OT_GenerateSkeletonData(bpy.types.Operator):
+    bl_idname = "io_tombraider45r.generate_skeleton_data"
     bl_label = "Generate Skeleton Data"
     bl_description = "Generates Bone data inside addon's directory, for each model in the game based on .PHD files from DATA folders.\nRequires Game Directory to be provided."
 
@@ -197,8 +197,8 @@ class TR123R_OT_GenerateSkeletonData(bpy.types.Operator):
             row.label(text=line)
     
 cls = (
-    TR123R_OT_CreateShader,
-    TR123R_OT_UV_QuantizeVerts,
-    TR123R_OT_GenerateSkeletonData
+    TR45R_OT_CreateShader,
+    TR45R_OT_UV_QuantizeVerts,
+    TR45R_OT_GenerateSkeletonData
 )
 _register, _unregister = bpy.utils.register_classes_factory(cls)

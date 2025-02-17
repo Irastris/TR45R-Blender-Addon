@@ -69,9 +69,9 @@ from bpy.props import StringProperty, BoolProperty, EnumProperty, CollectionProp
 from bpy.types import Operator
 import os
 
-class TR123R_OT_ImportTRM(Operator, ImportHelper):
+class TR45R_OT_ImportTRM(Operator, ImportHelper):
     """Load object from TRM file"""
-    bl_idname = "io_tombraider123r.trm_import"
+    bl_idname = "io_tombraider45r.trm_import"
     bl_label = "Import TRM"
     bl_options = {'UNDO'}
 
@@ -125,12 +125,11 @@ class TR123R_OT_ImportTRM(Operator, ImportHelper):
         description="Specify the game to look for the textures and armatures in.\n"
                     "This is only if game directory path is specified for ambiguous model paths",
         items=(
-            ('1', "I", ""),
-            ('2', "II", ""),
-            ('3', "III", ""),
+            ('4', "IV", ""),
+            ('5', "V", ""),
             ('REL', "Relative", "Relatively to the TRM file")
         ),
-        default='1',
+        default='4',
     )
 
     merge_uv: BoolProperty(
@@ -783,7 +782,7 @@ class TR123R_OT_ImportTRM(Operator, ImportHelper):
             # TODO: Support more/all TRMs - this will require pairing TRM names with model IDs
             if not os.path.exists(skeldata_path):
                 print("Generating Skeleton Data...")
-                result = bpy.ops.io_tombraider123r.generate_skeleton_data()
+                result = bpy.ops.io_tombraider45r.generate_skeleton_data()
                 if result == {'CANCELLED'}:
                     self.report({'ERROR'}, "Could not generate Skeleton Data!\nCheck if Game Directory path in addon's preferences is provided. Armature not imported.")
                     skeldata_path = None
@@ -835,8 +834,8 @@ class TR123R_OT_ImportTRM(Operator, ImportHelper):
             if addon_prefs.game_path:
                 use_texdir = True                
                 # Set the game directory number if path in preferences was provided
-                if Path.exists(f'{addon_prefs.game_path}/tomb123.exe'):
-                    for i in range(1,4):
+                if Path.exists(f'{addon_prefs.game_path}/tomb456.exe'):
+                    for i in range(4,6):
                         if Path.abspath(f'{addon_prefs.game_path}/{i}') in Path.abspath(self.directory):
                             use_texdir = False
                             self.tex_dir = str(i)
@@ -856,7 +855,7 @@ class TR123R_OT_ImportTRM(Operator, ImportHelper):
                 col.enabled = False
 
 def register():
-    bpy.utils.register_class(TR123R_OT_ImportTRM)
+    bpy.utils.register_class(TR45R_OT_ImportTRM)
 
 def unregister():
-    bpy.utils.unregister_class(TR123R_OT_ImportTRM)
+    bpy.utils.unregister_class(TR45R_OT_ImportTRM)
